@@ -18,6 +18,7 @@
             acc1.Withdraw(1000, DateTime.UtcNow, "");
             Console.WriteLine(acc1.balance);
 
+            Console.WriteLine(acc1.GetAccountHistory());
             try
             {
                 acc2.Withdraw(1000, DateTime.UtcNow, "");

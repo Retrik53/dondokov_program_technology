@@ -63,5 +63,20 @@ namespace bank
             var dep = new transaction(-amount,date, note);
             alltransactions.Add(dep);
         }
+
+
+        public string GetAccountHistory() 
+        {
+            var report = new StringBuilder();
+
+            decimal balance = 0;
+            report.AppendLine("Data\t\tAmount\tBalance\tNote");
+            foreach (var item in alltransactions)
+            {
+                balance += item.Amount;
+                report.AppendLine($"{item.date.ToShortDateString()}\t" + $"{item.Amount}\t{balance}\t{item.note}");
+            }
+            return report.ToString();
+        }
     }
 }

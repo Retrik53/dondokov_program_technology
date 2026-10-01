@@ -1,2 +1,2 @@
-# dondokov_program_technology_vokodnod
-in december >:(
+# dondokov_program_technology
+in december

@@ -28,6 +28,12 @@
             {
                 Console.WriteLine(e.Message);
             }
+            InterestEarningAccount interestearning = new("Bazar", 3210);
+            interestearning.deposit(2000m, DateTime.UtcNow, ":0");
+            interestearning.Withdraw(2000m, DateTime.UtcNow, ":0");
+            interestearning.PerformMonthAndTransactions();
+            Console.WriteLine(interestearning); //Console.WriteLine(interestearning.ToString);
+            Console.WriteLine(interestearning.GetAccountHistory());
 
         }
     }

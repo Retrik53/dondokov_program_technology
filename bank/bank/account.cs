@@ -3,7 +3,7 @@ using System.Text;
 
 namespace bank
 {
-    internal class account
+    internal class account // класс - потомок класса object => можно переопределить виртуальные методы в этом классе
     {
         private List<transaction> alltransactions = new List<transaction>();
         public string Owner
@@ -79,5 +79,18 @@ namespace bank
             }
             return report.ToString();
         }
+
+        //Ключевое слово virtual позволяет в дочернем классе предоставить другую реализацию метода PerformMonthAndTransactions()
+        public virtual void PerformMonthAndTransactions()
+        {
+            
+        }
+
+        //public override string ToString()
+        //{
+        //    return $"Type: {GetType().Name}\tOwner: {Owner}\t Account Number: {number}\t Balance: {balance}";
+        //}
+
+        public override string ToString() => $"Type: {GetType().Name}\tOwner: {Owner}\t Account Number: {number}\t Balance: {balance}";
     }
 }

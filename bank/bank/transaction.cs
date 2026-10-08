@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace bank
+﻿namespace bank
 {
-    internal record transaction(decimal Amount, DateTime date, string note)
+    public record transaction(decimal Amount, DateTime date, string note)
     {
 
     }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace bank
+﻿namespace bank
 {
-    internal class InterestEarningAccount: account
+    public class InterestEarningAccount: account
     {
         public InterestEarningAccount(string name, decimal initialBalance) 
             : base(name, initialBalance) 

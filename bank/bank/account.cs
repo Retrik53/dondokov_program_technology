@@ -1,10 +1,18 @@
-﻿using System.Buffers;
-using System.Text;
+﻿using System.Text;
 
 namespace bank
 {
-    internal class account // класс - потомок класса object => можно переопределить виртуальные методы в этом классе
+    public class account // класс - потомок класса object => можно переопределить виртуальные методы в этом классе
     {
+        private readonly decimal _minimumBalance;
+
+        private static int staccnum = 1000000000;
+
+        public string number
+        {
+            get;
+            private set;
+        }
         private List<transaction> alltransactions = new List<transaction>();
         public string Owner
         {
@@ -24,19 +32,21 @@ namespace bank
             private set;
         }
 
-        public string number
+
+        public account(string inowner, decimal inbalance): this(inowner,inbalance, 0)
         {
-            get;
-            private set;
         }
-        private static int staccnum = 1000000000;
-        public account(string inowner, decimal inbalance)
+
+        public account(string inowner, decimal inbalance, decimal minimumBalance)
         {
 
             Owner = inowner;
             deposit(inbalance, DateTime.UtcNow, "initial balance\n");
             number = staccnum.ToString();
             staccnum++;
+            _minimumBalance = minimumBalance;
+
+            if (inbalance > 0) deposit(inbalance, DateTime.UtcNow, "Initial balance");
         }
 
         public void deposit(decimal  amount, DateTime date, string note)
@@ -50,21 +60,37 @@ namespace bank
             Console.WriteLine($"На счет было начислено: {dep.Amount}\nДата:{dep.date}\nСообщение:{dep.note}");
         }
 
+        //public void Withdraw(decimal amount, DateTime date, string note)
+        //{
+        //    if (amount <= 0)
+        //    {
+        //        throw new ArgumentOutOfRangeException(nameof(amount), "Неверный ввод");
+        //    }
+        //    if (amount > balance)
+        //    {
+        //        throw new InvalidOperationException("Недостаточно средств");
+        //    }
+
+        //    var dep = new transaction(-amount,date, note);
+        //    alltransactions.Add(dep);
+        //}
+
         public void Withdraw(decimal amount, DateTime date, string note)
         {
-            if (amount <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(amount), "Неверный ввод");
-            }
-            if (amount > balance)
-            {
-                throw new InvalidOperationException("Недостаточно средств");
-            }
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
 
-            var dep = new transaction(-amount,date, note);
-            alltransactions.Add(dep);
+            transaction? overdraftTransaction = CheckWithdrawalLimit(balance - amount < _minimumBalance);
+
+            transaction? withdrawal = new(-amount, date, note);
+
+            alltransactions.Add(withdrawal);
         }
 
+        protected virtual transaction? CheckWithdrawalLimit(bool isOverdrawn)
+        {
+            if (isOverdrawn) throw new InvalidOperationException("Not sufficient rubles for this withdrawal");
+            else return default;
+        }
 
         public string GetAccountHistory() 
         {
@@ -92,5 +118,6 @@ namespace bank
         //}
 
         public override string ToString() => $"Type: {GetType().Name}\tOwner: {Owner}\t Account Number: {number}\t Balance: {balance}";
+
     }
 }

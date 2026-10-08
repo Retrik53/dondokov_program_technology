@@ -32,9 +32,27 @@
             interestearning.deposit(2000m, DateTime.UtcNow, ":0");
             interestearning.Withdraw(2000m, DateTime.UtcNow, ":0");
             interestearning.PerformMonthAndTransactions();
-            Console.WriteLine(interestearning); //Console.WriteLine(interestearning.ToString);
+            Console.WriteLine(interestearning); //== Console.WriteLine(interestearning.ToString);
             Console.WriteLine(interestearning.GetAccountHistory());
 
+            LineOfCreditAccount LineOfCredit = new LineOfCreditAccount("Bazar", 0, 1000m);
+            LineOfCredit.Withdraw(500m, DateTime.UtcNow, "credit");
+
+            GiftCardAccount giftcard = new GiftCardAccount("Bazar", 1000m, 5000m);
+
+            List<account> accounts = new List<account>();
+            accounts.Add(acc1);
+            accounts.Add(acc2);
+            accounts.Add(interestearning);
+            accounts.Add(LineOfCredit);
+            accounts.Add(giftcard);
+
+            foreach (account account in accounts)
+            {
+                Console.WriteLine(account);
+                account.PerformMonthAndTransactions();
+                Console.WriteLine(account.GetAccountHistory());
+            }
         }
     }
 }

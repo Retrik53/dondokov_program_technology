@@ -54,7 +54,7 @@ namespace bank
         /// </summary>
         /// <param name="owner">ФИО владельца.</param>
         /// <param name="initialBalance">Начальный баланс счёта.</param>
-        public account(string inowner, decimal inbalance): this(inowner,inbalance, 0)
+        public account(string inowner, decimal inbalance, Status serviceLevel): this(inowner,inbalance, 0, serviceLevel)
         {
         }
         

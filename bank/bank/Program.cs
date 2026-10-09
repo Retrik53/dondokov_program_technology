@@ -56,7 +56,7 @@ namespace bank
                 Console.WriteLine(account.GetAccountHistory());
             }
 
-            var acc52 = new account("Дондоков Б.З.", 15_000m,)
+            var acc52 = new account("Дондоков Б.З.", 15_000m,new RegularLevel())
             {
                 ServiceLevel = new VIPLevel()
             };

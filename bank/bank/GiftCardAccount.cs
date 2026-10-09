@@ -24,11 +24,12 @@
         /// </summary>
         public override void PerformMonthAndTransactions()
         {
-            if (_monthlyDeposit != 0) 
-            {
+            base.PerformMonthAndTransactions();
+
+            if (_monthlyDeposit != 0)
                 deposit(_monthlyDeposit, DateTime.UtcNow, "Add monthly deposit");
-            }
         }
+
 
         /// <summary>
         /// Возвращает строковое представление подарочного счёта.

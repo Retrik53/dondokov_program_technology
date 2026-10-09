@@ -22,8 +22,10 @@
         /// </summary>
         public override void PerformMonthAndTransactions()
         {
-            decimal interest = balance * 0.02m;
-            deposit(interest, DateTime.UtcNow, "Apply month interest");
+            base.PerformMonthAndTransactions();
+
+            if (balance > 0)
+                deposit(balance * 0.02m, DateTime.UtcNow, "Savings interest");
         }
     }
 }

@@ -15,5 +15,13 @@
         {
 
         }
+
+        public override void PerformMonthAndTransactions()
+        {
+            base.PerformMonthAndTransactions();
+
+            if (balance < 0)
+                Withdraw(-balance * 0.07m, DateTime.UtcNow, "Loan interest");
+        }
     }
 }

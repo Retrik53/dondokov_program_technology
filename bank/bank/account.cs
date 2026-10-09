@@ -28,6 +28,7 @@ namespace bank
         {
             get; private set;
         }
+
         /// <summary>
         /// Текущий баланс счёта, вычисляемый как сумма всех операций.
         /// </summary>
@@ -63,7 +64,7 @@ namespace bank
         /// <param name="owner">ФИО владельца.</param>
         /// <param name="initialBalance">Начальный баланс счёта.</param>
         /// <param name="minimumBalance">Минимально допустимый баланс (может быть отрицательным для кредитных счетов).</param>
-        public account(string inowner, decimal inbalance, decimal minimumBalance)
+        public account(string inowner, decimal inbalance, decimal minimumBalance, Status serviceLevel)
         {
 
             Owner = inowner;
@@ -71,6 +72,7 @@ namespace bank
             number = staccnum.ToString();
             staccnum++;
             _minimumBalance = minimumBalance;
+            ServiceLevel = serviceLevel;
 
             if (inbalance > 0) deposit(inbalance, DateTime.UtcNow, "Initial balance");
         }

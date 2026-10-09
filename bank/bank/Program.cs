@@ -1,4 +1,6 @@
-﻿namespace bank
+﻿using System.Security.Principal;
+
+namespace bank
 {
     internal class Program
     {
@@ -53,6 +55,17 @@
                 account.PerformMonthAndTransactions();
                 Console.WriteLine(account.GetAccountHistory());
             }
+
+            var acc52 = new account("Дондоков Б.З.", 15_000m,)
+            {
+                ServiceLevel = new VIPLevel()
+            };
+
+            acc52.Withdraw(2_000m, DateTime.UtcNow, "Покупка");
+            acc52.PerformMonthAndTransactions();
+
+            Console.WriteLine(acc52);
+            Console.WriteLine(acc52.GetAccountHistory());
         }
     }
 }
